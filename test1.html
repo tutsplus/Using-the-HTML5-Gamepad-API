@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+		
+	</head>
+	<body>
+
+	<div id="gamepadPrompt"></div>
+		
+	<script>
+	function canGame() {
+		return "getGamepads" in navigator;
+	}
+
+	$(document).ready(function() {
+
+		if(canGame()) {
+
+			var prompt = "To begin using your gamepad, connect it and press any button!";
+			$("#gamepadPrompt").text(prompt);
+			
+			$(window).on("gamepadconnected", function() {
+				$("#gamepadPrompt").html("Gamepad connected!");
+				console.log("connection event");
+			});
+
+			$(window).on("gamepaddisconnected", function() {
+				console.log("disconnection event");
+				$("#gamepadPrompt").text(prompt);
+			});
+
+		}
+		
+	});
+	</script>
+	</body>
+</html>
